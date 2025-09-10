@@ -52,9 +52,9 @@ def main():
     global rets_client
 
     layout = [
-        [sg.Text("Login URL:"), sg.Input(default_text="https://rets.nlar.mlxmatrix.com/Rets/login.ashx", key='-LOGIN_URL-', size=(50, 1))],
-        [sg.Text("Username:"), sg.Input(default_text="SMARTERAGENTMOBILE", key='-USERNAME-', size=(50, 1))],
-        [sg.Text("Password:"), sg.Input(default_text="#SMA@22bile", key='-PASSWORD-', password_char='*', size=(50, 1))],
+        [sg.Text("Login URL:"), sg.Input(default_text="RETS URL", key='-LOGIN_URL-', size=(50, 1))],
+        [sg.Text("Username:"), sg.Input(default_text="Username", key='-USERNAME-', size=(50, 1))],
+        [sg.Text("Password:"), sg.Input(default_text="Password", key='-PASSWORD-', password_char='*', size=(50, 1))],
         [sg.Button("Initialize Client")],
         [sg.HSeparator()],
         [sg.Text("Resource Name:"), sg.Input(default_text="Property", key='-RESOURCE-', size=(50, 1))],

@@ -1,6 +1,6 @@
 # RETS Hero (FreeSimpleGUI Client)
 
-Interactive desktop helper to explore RETS metadata and run ad‑hoc DMQL searches using a lightweight GUI (`rets_hero_pysimplegui.py`).
+Interactive desktop helper to explore RETS metadata and run ad‑hoc DMQL searches using a lightweight GUI (`rets_hero.py`).
 
 ## 1. Features
 
@@ -29,21 +29,21 @@ pip install rets FreeSimpleGUI
 
 ## 3. File Overview
 
-`rets_hero_pysimplegui.py` – main executable script providing the GUI.
+`rets_hero.py` – main executable script providing the GUI.
 
 ## 4. Running the App
 
 From the `rets_hero` directory:
 
 ```Shell
-python rets_hero_pysimplegui.py
+python rets_hero.py
 ```
 
 If on Linux and you want to run it directly:
 
 ```Shell
-chmod +x rets_hero_pysimplegui.py
-./rets_hero_pysimplegui.py
+chmod +x rets_hero.py
+./rets_hero.py
 ```
 
 ## 5. UI Workflow
