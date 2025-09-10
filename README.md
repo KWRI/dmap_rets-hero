@@ -1,103 +1,152 @@
-# Hello, this file is RETS Hero!
+# RETS Hero (FreeSimpleGUI Client)
 
-Python is needed to run this successfully, I used python 3.13.3. Docker is optional, is still being worked out fully, so use with caution. Some general things to remember:
+Interactive desktop helper to explore RETS metadata and run ad‑hoc DMQL searches using a lightweight GUI (`rets_hero_pysimplegui.py`).
 
-* Make sure python 3.13.3 is installed on your system
-* Make sure you are working out of the correct directory for everything.
+## 1. Features
 
-# RETS Client Script: Windows Installation & Run Guide
+* Login to a RETS endpoint
+* List all resources (e.g. Property, Office, Agent)
+* List classes for a selected resource
+* Inspect table (field) metadata for a resource/class
+* Execute DMQL searches with a configurable limit
+* View results or metadata in a scrollable popup window
 
-## Prerequisites
+## 2. Requirements
 
-1. **Install Python 3.x**
+* Python 3.8+ (earlier may work, not tested)
+* Packages:
+  * `rets` (Python RETS client library)
+  * `FreeSimpleGUI` (drop‑in like PySimpleGUI; installable via pip)
+  * (Standard library modules already included: `json`, `tkinter`, etc.)
 
-   - Download and install Python from [python.org](vscode-file://vscode-app/c:/Users/yanir.regev2/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html).
-   - During installation, check **"Add Python to PATH"**.
-2. **Install Git (optional, if you want to clone from a repository)**
+Install dependencies:
 
-   - Download and install Git from [git-scm.com](vscode-file://vscode-app/c:/Users/yanir.regev2/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html).
-3. **Install pip (if not included with Python)**
-
-   - **Open Command Prompt and run:**
-     ```powershell
-     python -m ensurepip --upgrade
-     ```
-4. **Install Tkinter (usually included with Python)**
-
-   - Tkinter is bundled with standard Python installers for Windows. No extra steps are needed.
-5. **Install VcXsrv (only if running from Docker and need GUI forwarding)**
-
-   - Download and install [VcXsrv](vscode-file://vscode-app/c:/Users/yanir.regev2/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html).
-
----
-
-## Steps to Install and Run
-
-### 1. **Download or Clone the Script**
-
-- **Clone with Git:**
-  ```powershell
-  git clone [https://github.com/your-repo/rets-client.git](https://github.com/your-repo/rets-client.git)
-
-  cd rets-client
-  ```
-- **Or** simply download the script files and place them in a folder, e.g., `C:\rets_client`.
-
-### 2. **(Optional) Create a Virtual Environment**
-
-```powershell
-python -m venv venv_name
-venv\Scripts\activate
+```Shell
+pip install rets FreeSimpleGUI
 ```
 
-### 3. **Install Required Python Packages**
+> If `FreeSimpleGUI` is not available in PyPI for your environment, substitute with `PySimpleGUI` and adjust the import in the script (`import PySimpleGUI as sg`).
 
-```powershell
-pip install rets
+## 3. File Overview
+
+`rets_hero_pysimplegui.py` – main executable script providing the GUI.
+
+## 4. Running the App
+
+From the `rets_hero` directory:
+
+```Shell
+python rets_hero_pysimplegui.py
 ```
 
-### 4. **Run the Script**
+If on Linux and you want to run it directly:
 
-```powershell
-python refindly_rets_v2.py
+```Shell
+chmod +x rets_hero_pysimplegui.py
+./rets_hero_pysimplegui.py
 ```
 
-- The Tkinter GUI should appear.
-- Fill in the fields or use the provided defaults.
+## 5. UI Workflow
 
----
+1. Enter credentials:
+   * Login URL
+   * Username
+   * Password (masked)
+2. Click "Initialize Client" – a success popup should appear if authenticated.
+3. Use the action buttons:
+   * "All Resources": fetches and displays resource metadata.
+   * "All Classes": requires a Resource (e.g. `Property`); lists classes (e.g. `Listing`).
+   * "Metadata": requires Resource + Class; shows table/field metadata.
+   * "Search": runs a DMQL query against the chosen resource/class.
 
-## (Optional) Running with Docker
+## 6. Fields Explained
 
-1. **Install Docker Desktop**
+| Field         | Purpose                   | Example                               |
+| ------------- | ------------------------- | ------------------------------------- |
+| Login URL     | RETS login endpoint       | `https://rets.example.com/rets/login` |
+| Resource Name | RETS resource container   | `Property`                            |
+| Class Name    | Class within the resource | `Listing`                             |
+| DMQL Query    | Filter expression         | `(ListPrice=150000+)`                 |
+| Limit         | Max records to fetch      | `25`                                  |
 
-   - Download and install from [docker.com](vscode-file://vscode-app/c:/Users/yanir.regev2/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html).
-2. **Install VcXsrv and Start It**
+## 7. DMQL Query Examples
 
-   - Run XLaunch, select "Multiple windows", display number `0`, and **Disable access control**.
-3. **Set DISPLAY Environment Variable**
+Basic price minimum:
 
-   - In Command Prompt or PowerShell:
+```
+(ListPrice=300000+)
+```
 
-     ```powershell
-     set DISPLAY=host.docker.internal:0
-     ```
-4. **Build the Docker Image**
+Price range:
 
-   ```powershell
-   docker build -t rets\_client .
-   ```
-5. **Run the Docker Container**
+```
+(ListPrice=300000-500000)
+```
 
-   ```powershell
-   docker run -it --rm -e DISPLAY=host.docker.internal:0 rets\_client
-   ```
+Multiple conditions (AND):
 
----
+```
+((ListPrice=300000-500000),(BedsTotal=3+))
+```
 
-## Troubleshooting
+OR logic (depends on server dialect – often comma is AND and pipe may emulate OR if supported):
 
-- If you get a `ModuleNotFoundError`, ensure you installed all required packages.
-- If the GUI does not appear when using Docker, ensure VcXsrv is running and `DISPLAY` is set correctly.
-- For any authentication or RETS errors, double-check your credentials and server URL.
+```
+((City=Austin)|(City=Cedar Park))
+```
 
+Always consult the specific MLS RETS metadata for exact field names and allowed values.
+
+## 8. Output
+
+Results and metadata open in a separate modal window with a scrollable multiline text area. You can copy text directly. Close the window to return to the main interface.
+
+## 9. Troubleshooting
+
+| Issue                     | Possible Cause              | Fix                                                                                  |
+| ------------------------- | --------------------------- | ------------------------------------------------------------------------------------ |
+| Login fails               | Bad credentials / wrong URL | Verify credentials; confirm RETS URL ends with `login` path                          |
+| Empty search results      | Query too restrictive       | Test a simpler query like `(ListPrice=0+)`                                           |
+| Unicode / encoding errors | MLS sends unusual charset   | Ensure `rets` package up to date; try setting locale `export PYTHONIOENCODING=UTF-8` |
+| GUI won't start (Linux)   | Missing Tk bindings         | Install system packages: `sudo apt-get install python3-tk`                           |
+
+## 10. Security Notes
+
+* Do NOT hardcode production credentials in the script.
+* Avoid committing credentials to version control.
+* Rotate RETS credentials periodically per MLS policy.
+
+## 11. Customization Ideas
+
+* Add export to CSV for search results.
+* Add paging or offset controls.
+* Cache metadata locally to reduce repeated calls.
+* Add a status bar / progress indicator for large searches.
+
+## 12. Minimal Code Snippet (Entry Point)
+
+```Python
+if __name__ == '__main__':
+	 main()
+```
+
+## 13. Known Limitations
+
+* Script uses a global `rets_client`; not ideal for multi-session use.
+* No persistent configuration file; defaults are embedded.
+* Error handling is broad (`except Exception`)—can be refined.
+
+## 14. Contributing
+
+1. Fork / branch
+2. Make changes
+3. Add concise comments for new UI elements
+4. Submit PR with screenshots (optional)
+
+## 15. License
+
+Internal / TBD (add license section when determined).
+
+***
+
+Questions or improvements welcomed—extend the GUI to fit your MLS workflow.
