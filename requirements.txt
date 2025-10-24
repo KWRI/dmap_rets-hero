@@ -1,0 +1,5 @@
+# Core dependencies for RETS Hero
+# Prefer PySimpleGUI; script falls back to FreeSimpleGUI if PySimpleGUI import fails.
+rets
+PySimpleGUI
+# FreeSimpleGUI  # Optional fallback if PySimpleGUI unavailable
