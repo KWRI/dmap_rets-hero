@@ -1,5 +1,7 @@
 # Core dependencies for RETS Hero
-# Prefer PySimpleGUI; script falls back to FreeSimpleGUI if PySimpleGUI import fails.
+# PySimpleGUI is now the sole GUI backend (fallback to FreeSimpleGUI removed in Oct 2025 refactor).
 rets
-PySimpleGUI
-# FreeSimpleGUI  # Optional fallback if PySimpleGUI unavailable
+FreeSimpleGUI
+
+# Optional / environment-specific extras (uncomment if needed):
+# IPython   # For richer notebook detection/logging; not required for normal GUI use

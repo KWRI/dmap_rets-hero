@@ -17,11 +17,8 @@ import sys
 import json
 from typing import Any
 
-# Prefer PySimpleGUI; fall back to FreeSimpleGUI if aliased that way
-try:  # pragma: no cover - import guard
-    import PySimpleGUI as sg  # type: ignore
-except Exception:  # pragma: no cover
-    import FreeSimpleGUI as sg  # type: ignore
+# Switch to FreeSimpleGUI per latest request (PySimpleGUI removed)
+import FreeSimpleGUI as sg  # type: ignore
 
 from rets import Session  # type: ignore
 
