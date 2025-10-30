@@ -50,6 +50,7 @@ If Python not found, install from [https://www.python.org/downloads/](https://ww
 ```PowerShell
 iwr https://astral.sh/uv/install.ps1 -UseBasicParsing | iex
 ```
+Make sure to exit PowerShell, and open it again to apply the update.
 
 Verify:
 
