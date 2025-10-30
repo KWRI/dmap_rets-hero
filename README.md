@@ -92,7 +92,7 @@ uv venv .venv
 Add required packages via `uv`:
 
 ```PowerShell
-uv add rets FreeSimpleGUI
+uv sync
 ```
 
 This creates/updates `pyproject.toml` (if used) and a `uv.lock` for reproducible builds.
