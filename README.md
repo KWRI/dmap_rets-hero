@@ -36,7 +36,7 @@ You will:
 Check Python:
 
 ```PowerShell
-python --version
+python --version  # If python doesn't work, try py --version or python3 --version
 ```
 
 If Python not found, install from [https://www.python.org/downloads/](https://www.python.org/downloads/) and re‑open PowerShell.
