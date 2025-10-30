@@ -50,6 +50,7 @@ If Python not found, install from [https://www.python.org/downloads/](https://ww
 ```PowerShell
 iwr https://astral.sh/uv/install.ps1 -UseBasicParsing | iex
 ```
+
 Make sure to exit PowerShell, and open it again to apply the update.
 
 Verify:
@@ -68,7 +69,7 @@ If you have not already:
 
 ```PowerShell
 # Navigate to a workspace directory
-tcd ~  # or cd C:\dev
+cd /Users/my-user/folder/choice/for/file
 
 # Clone (replace URL if using internal repo)
 git clone https://github.com/KWRI/dmap_rets-hero dmap_rets-hero
@@ -97,12 +98,6 @@ uv sync
 
 This creates/updates `pyproject.toml` (if used) and a `uv.lock` for reproducible builds.
 
-Reconcile environment (if lock changed):
-
-```PowerShell
-uv sync
-```
-
 ---
 
 ## 7. Run the Application
@@ -110,7 +105,7 @@ uv sync
 Using `uv` (activation optional):
 
 ```PowerShell
-uv run python rets-hero.py
+uv run python rets-hero.py # Make sure to use python here, and NOT py or python3, even if your local python is called using those.
 ```
 
 If you see a message about headless mode, you may be in an environment without a GUI (e.g. remote session). On a standard desktop, the window should appear.
