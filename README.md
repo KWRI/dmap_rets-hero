@@ -71,7 +71,7 @@ If you have not already:
 tcd ~  # or cd C:\dev
 
 # Clone (replace URL if using internal repo)
-git clone <repo-url> dmap_rets-hero
+git clone https://github.com/KWRI/dmap_rets-hero dmap_rets-hero
 cd dmap_rets-hero
 ```
 
