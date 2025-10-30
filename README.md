@@ -2,7 +2,7 @@
 
 This guide walks through installing and running **RETS Hero** on a Windows PC using the high‑performance **`uv`** package manager (recommended over classic `pip`). It is Windows‑specific; for cross‑platform usage see the main `README.md`.
 
-For installation using bash, please view this document: [README-Bash.md](https://github.com/KWRI/dmap_rets-hero/blob/main/README-Bash.md)
+For installation using linux bash, please view this document: [README-Bash.md](https://github.com/KWRI/dmap_rets-hero/blob/main/README-Bash.md)
 
 ---
 
